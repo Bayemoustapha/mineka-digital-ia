@@ -1,0 +1,383 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Mineka Digital IA · Kaolack</title>
+<meta name="description" content="Logos, affiches, sites web et chatbots WhatsApp pour les commerçants et PME du Sénégal. Basé à Kaolack.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@62..125,400..900&family=Atkinson+Hyperlegible:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --indigo: #1F2A5C;
+    --indigo-deep: #161E45;
+    --ink: #14182E;
+    --sel: #F2F3F8;
+    --rose: #EBA6BC;
+    --arachide: #D39233;
+    --wa: #1A9E50;
+    --muted: #5A6080;
+
+    --display: "Archivo", system-ui, sans-serif;
+    --body: "Atkinson Hyperlegible", system-ui, sans-serif;
+
+    --gutter: clamp(16px, 5vw, 64px);
+    --max: 1160px;
+  }
+
+  * { box-sizing: border-box; }
+  html { scroll-behavior: smooth; }
+  body {
+    margin: 0;
+    background: var(--sel);
+    color: var(--ink);
+    font: 400 1.0625rem/1.6 var(--body);
+    -webkit-font-smoothing: antialiased;
+  }
+  img { max-width: 100%; display: block; }
+  a { color: inherit; }
+  :focus-visible { outline: 3px solid var(--arachide); outline-offset: 3px; border-radius: 4px; }
+
+  .wrap { max-width: var(--max); margin: 0 auto; padding: 0 var(--gutter); }
+
+  /* Boutons */
+  .btn-wa {
+    display: inline-flex; align-items: center; gap: .6em;
+    background: var(--wa); color: #fff; text-decoration: none;
+    font: 700 1.05rem/1 var(--body);
+    padding: 1em 1.4em; border-radius: 999px;
+    transition: transform .15s ease, background .15s ease;
+  }
+  .btn-wa:hover { background: #158643; transform: translateY(-1px); }
+  .btn-wa svg { width: 1.3em; height: 1.3em; flex: none; }
+  .link-quiet { font-weight: 700; text-underline-offset: 4px; }
+
+  /* En-tête */
+  .top {
+    display: flex; justify-content: space-between; align-items: center;
+    padding-block: 22px;
+  }
+  .logo {
+    font: 900 1.35rem/1 var(--display);
+    font-stretch: 112%;
+    letter-spacing: -.01em;
+    text-decoration: none;
+    display: inline-flex; align-items: baseline; gap: .35em;
+  }
+  .logo i {
+    font-style: normal; font-weight: 600; font-stretch: 80%;
+    color: var(--indigo); background: var(--rose);
+    padding: .15em .4em; border-radius: 6px; font-size: .78em;
+  }
+  .top .link-quiet { font-size: .98rem; }
+
+  /* Hero */
+  .hero {
+    display: grid; grid-template-columns: 1.15fr .85fr;
+    gap: clamp(32px, 6vw, 88px); align-items: center;
+    padding-block: clamp(32px, 7vw, 96px) clamp(56px, 9vw, 120px);
+  }
+  .hero h1 {
+    font: 850 clamp(2.2rem, 4.4vw, 3.9rem)/1 var(--display);
+    font-stretch: 112%;
+    hyphens: none;
+    letter-spacing: -.025em;
+    margin: 0 0 .45em;
+    color: var(--indigo);
+    text-wrap: balance;
+  }
+  .hero p.lead {
+    font-size: clamp(1.1rem, 1.6vw, 1.3rem);
+    max-width: 34ch; margin: 0 0 2rem; color: var(--ink);
+  }
+  .hero .actions { display: flex; flex-wrap: wrap; gap: 14px 24px; align-items: center; }
+  .hero .where { margin-top: 2.2rem; color: var(--muted); font-size: .95rem; max-width: 40ch; }
+
+  /* Téléphone et conversation */
+  .phone {
+    background: var(--indigo); border-radius: 34px; padding: 12px;
+    box-shadow: 18px 22px 0 var(--rose);
+    max-width: 360px; justify-self: center; width: 100%;
+    transform: rotate(1.5deg);
+  }
+  .screen { background: #E9E4DC; border-radius: 24px; overflow: hidden; }
+  .chat-head {
+    background: #0F5E45; color: #fff; display: flex; align-items: center; gap: 10px;
+    padding: 12px 14px;
+  }
+  .avatar {
+    width: 36px; height: 36px; border-radius: 50%; background: var(--arachide);
+    display: grid; place-items: center; font: 800 .95rem/1 var(--display); color: var(--ink);
+  }
+  .chat-head b { display: block; font-size: .95rem; }
+  .chat-head small { opacity: .8; font-size: .78rem; }
+  .chat { padding: 16px 12px 20px; display: flex; flex-direction: column; gap: 8px; min-height: 380px; }
+  .msg {
+    max-width: 82%; padding: 8px 10px 6px; border-radius: 10px;
+    font-size: .92rem; line-height: 1.4; position: relative;
+    box-shadow: 0 1px 0 rgba(20,24,46,.12);
+  }
+  .msg time { display: block; text-align: right; font-size: .68rem; color: #6b6f80; margin-top: 2px; }
+  .in { background: #fff; align-self: flex-start; border-top-left-radius: 2px; }
+  .out { background: #D7F5C6; align-self: flex-end; border-top-right-radius: 2px; }
+  .bot-tag { display: block; font-size: .7rem; font-weight: 700; color: #0F5E45; margin-bottom: 2px; }
+  .phone-caption { text-align: center; margin: 26px auto 0; font-size: .95rem; color: var(--muted); max-width: 30ch; }
+
+  @media (prefers-reduced-motion: no-preference) {
+    .chat .msg { opacity: 0; transform: translateY(8px); animation: pop .35s ease forwards; }
+    .chat .msg:nth-child(1) { animation-delay: .5s; }
+    .chat .msg:nth-child(2) { animation-delay: 1.5s; }
+    .chat .msg:nth-child(3) { animation-delay: 2.7s; }
+    .chat .msg:nth-child(4) { animation-delay: 3.7s; }
+    .chat .msg:nth-child(5) { animation-delay: 4.9s; }
+  }
+  @keyframes pop { to { opacity: 1; transform: none; } }
+
+  /* Tableau des prix */
+  .tarifs { background: var(--indigo); color: var(--sel); padding-block: clamp(64px, 9vw, 120px); }
+  .section-title {
+    font: 800 clamp(2rem, 4.4vw, 3.4rem)/1.02 var(--display);
+    font-stretch: 112%; letter-spacing: -.02em; margin: 0 0 .35em; text-wrap: balance;
+  }
+  .section-intro { max-width: 52ch; margin: 0 0 3rem; font-size: 1.1rem; }
+  .tarifs .section-intro { color: #C9CCE0; }
+  .board { list-style: none; margin: 0; padding: 0; border-top: 2px solid rgba(242,243,248,.25); }
+  .board li {
+    display: grid; grid-template-columns: minmax(180px, 1fr) 2fr auto;
+    gap: 8px 40px; align-items: baseline;
+    padding: 26px 0; border-bottom: 2px solid rgba(242,243,248,.25);
+  }
+  .board h3 {
+    font: 750 clamp(1.35rem, 2.4vw, 1.75rem)/1.1 var(--display);
+    font-stretch: 105%; margin: 0; color: #fff;
+  }
+  .board p { margin: 0; color: #C9CCE0; max-width: 52ch; }
+  .price { text-align: right; white-space: nowrap; }
+  .price small { display: block; font-size: .85rem; color: #A9AECB; }
+  .price strong {
+    font: 850 clamp(1.4rem, 2.6vw, 2rem)/1 var(--display);
+    font-stretch: 95%; color: var(--arachide);
+  }
+  .tarifs .note { margin-top: 2rem; color: #A9AECB; font-size: .95rem; max-width: 60ch; }
+
+  /* Étapes */
+  .steps-sec { padding-block: clamp(64px, 9vw, 120px); }
+  .steps { list-style: none; padding: 0; margin: 0; display: grid; grid-template-columns: repeat(3, 1fr); gap: 40px; counter-reset: s; }
+  .steps li { counter-increment: s; }
+  .steps li::before {
+    content: counter(s);
+    display: block; font: 900 4.5rem/1 var(--display); font-stretch: 125%;
+    color: var(--rose); margin-bottom: 14px;
+  }
+  .steps h3 { font: 750 1.35rem/1.2 var(--display); margin: 0 0 .4em; color: var(--indigo); }
+  .steps p { margin: 0; max-width: 34ch; }
+
+  /* Pour qui */
+  .who { border-top: 2px solid #D9DBE8; padding-block: clamp(56px, 8vw, 100px); display: grid; grid-template-columns: 1fr 1fr; gap: clamp(32px, 6vw, 80px); }
+  .who .section-title { font-size: clamp(1.9rem, 3.4vw, 2.6rem); hyphens: none; }
+  .who ul { margin: 0; padding: 0; list-style: none; }
+  .who li { padding: 14px 0; border-bottom: 1px solid #D9DBE8; font-size: 1.1rem; }
+  .who li b { color: var(--indigo); }
+  .about p { max-width: 50ch; }
+  .about .sign { font-weight: 700; color: var(--indigo); }
+
+  /* FAQ */
+  .faq { padding-block: 0 clamp(64px, 9vw, 120px); }
+  .faq details { border-bottom: 1px solid #D9DBE8; padding: 6px 0; max-width: 760px; }
+  .faq summary {
+    cursor: pointer; list-style: none; padding: 16px 40px 16px 0; position: relative;
+    font: 700 1.15rem/1.3 var(--body); color: var(--indigo);
+  }
+  .faq summary::-webkit-details-marker { display: none; }
+  .faq summary::after {
+    content: "+"; position: absolute; right: 4px; top: 10px;
+    font: 400 1.8rem/1 var(--display); color: var(--arachide); transition: transform .2s ease;
+  }
+  .faq details[open] summary::after { transform: rotate(45deg); }
+  .faq details p { margin: 0 0 18px; max-width: 62ch; }
+
+  /* Appel final */
+  .final { background: var(--rose); padding-block: clamp(64px, 9vw, 112px); }
+  .final .section-title { color: var(--indigo); max-width: 18ch; }
+  .final p { max-width: 46ch; margin: 0 0 2rem; font-size: 1.1rem; }
+
+  footer { background: var(--indigo-deep); color: #A9AECB; padding-block: 32px; font-size: .92rem; }
+  footer .wrap { display: flex; flex-wrap: wrap; justify-content: space-between; gap: 12px; }
+
+  /* Bouton flottant mobile */
+  .wa-float {
+    position: fixed; right: 16px; bottom: 16px; z-index: 10;
+    width: 58px; height: 58px; border-radius: 50%; background: var(--wa);
+    display: none; place-items: center; color: #fff;
+    box-shadow: 0 6px 18px rgba(20,24,46,.25);
+  }
+  .wa-float svg { width: 30px; height: 30px; }
+
+  @media (max-width: 860px) {
+    .hero { grid-template-columns: 1fr; }
+    .phone { transform: none; box-shadow: 10px 12px 0 var(--rose); max-width: 330px; }
+    .board li { grid-template-columns: 1fr auto; }
+    .board li p { grid-column: 1 / -1; grid-row: 2; }
+    .steps { grid-template-columns: 1fr; gap: 28px; }
+    .who { grid-template-columns: 1fr; }
+    .wa-float { display: grid; }
+    .top .link-quiet { display: none; }
+  }
+</style>
+</head>
+<body>
+
+<svg width="0" height="0" style="position:absolute" aria-hidden="true">
+  <symbol id="wa" viewBox="0 0 24 24"><path fill="currentColor" d="M12.04 2C6.58 2 2.13 6.45 2.13 11.91c0 1.75.46 3.45 1.32 4.95L2.05 22l5.25-1.38a9.9 9.9 0 0 0 4.74 1.21h.01c5.46 0 9.91-4.45 9.91-9.91C21.96 6.45 17.5 2 12.04 2Zm5.8 14.03c-.25.69-1.44 1.32-1.98 1.37-.51.05-.99.24-3.33-.69-2.81-1.11-4.6-3.98-4.74-4.17-.14-.18-1.12-1.49-1.12-2.85 0-1.35.71-2.02.96-2.29.25-.28.55-.35.73-.35l.53.01c.17 0 .4-.06.62.48.23.55.78 1.9.85 2.04.07.14.11.3.02.48-.09.18-.14.3-.28.46-.14.16-.29.36-.41.48-.14.14-.28.29-.12.57.16.28.71 1.17 1.53 1.9 1.05.94 1.94 1.23 2.21 1.37.28.14.44.12.6-.07.16-.18.69-.8.88-1.08.18-.28.37-.23.62-.14.25.09 1.6.76 1.87.9.28.14.46.21.53.32.07.12.07.67-.18 1.36Z"/></symbol>
+</svg>
+
+<header class="wrap top">
+  <a class="logo" href="#" aria-label="Mineka Digital IA, accueil">Mineka <i>Digital IA</i></a>
+  <a class="link-quiet" data-wa href="#">Écrire sur WhatsApp</a>
+</header>
+
+<main>
+  <section class="wrap hero">
+    <div>
+      <h1>Vos clients écrivent sur WhatsApp. Répondez-leur, même la nuit.</h1>
+      <p class="lead">Logo, affiches, site web et chatbot WhatsApp pour les commerçants et les PME du Sénégal. Vous nous écrivez, on s'occupe du reste.</p>
+      <div class="actions">
+        <a class="btn-wa" data-wa href="#"><svg aria-hidden="true"><use href="#wa"/></svg>Discuter de mon projet</a>
+        <a class="link-quiet" href="#tarifs">Voir les tarifs</a>
+      </div>
+      <p class="where">Basés à Kaolack. On travaille avec toute la région du Saloum et, à distance, avec tout le Sénégal.</p>
+    </div>
+
+    <figure style="margin:0">
+      <div class="phone" role="img" aria-label="Exemple de conversation WhatsApp entre une cliente et le chatbot de la boutique Awa Wax à 23 h 14">
+        <div class="screen">
+          <div class="chat-head">
+            <span class="avatar" aria-hidden="true">A</span>
+            <span><b>Awa Wax, Kaolack</b><small>Répond en quelques secondes</small></span>
+          </div>
+          <div class="chat" aria-hidden="true">
+            <div class="msg in">Bonsoir, vous avez encore le wax bleu de la photo ?<time>23:14</time></div>
+            <div class="msg out"><span class="bot-tag">Assistant Awa Wax</span>Bonsoir ! Oui, il en reste 4 pièces de 6 yards à 12 000 FCFA. Je vous envoie les autres motifs ?<time>23:14</time></div>
+            <div class="msg in">Oui. Vous livrez à Médina Baye ?<time>23:15</time></div>
+            <div class="msg out"><span class="bot-tag">Assistant Awa Wax</span>Oui, livraison demain matin, 1 000 FCFA. Je réserve une pièce à votre nom ?<time>23:15</time></div>
+            <div class="msg in">Oui merci 🙏<time>23:16</time></div>
+          </div>
+        </div>
+      </div>
+      <figcaption class="phone-caption">Exemple de chatbot : la vente est faite à 23 h, la boutique est fermée.</figcaption>
+    </figure>
+  </section>
+
+  <section class="tarifs" id="tarifs">
+    <div class="wrap">
+      <h2 class="section-title">Ce qu'on fait pour vous</h2>
+      <p class="section-intro">Des prix clairs pour démarrer. Le devis final dépend de votre projet, et on vous le donne avant de commencer.</p>
+      <ul class="board">
+        <li>
+          <h3>Logo</h3>
+          <p>Trois propositions, deux séries de retouches, fichiers prêts pour l'enseigne, les sacs et les réseaux sociaux.</p>
+          <div class="price"><small>à partir de</small><strong>10 000 FCFA</strong></div>
+        </li>
+        <li>
+          <h3>Affiches et visuels</h3>
+          <p>Promotions, ouvertures, événements : affiches pour l'impression et visuels pour WhatsApp, Facebook et Instagram.</p>
+          <div class="price"><small>à partir de</small><strong>5 000 FCFA</strong></div>
+        </li>
+        <li>
+          <h3>Site web</h3>
+          <p>Un site simple qui présente votre activité, vos produits et vos contacts, lisible sur tous les téléphones.</p>
+          <div class="price"><small>à partir de</small><strong>125 000 FCFA</strong></div>
+        </li>
+        <li>
+          <h3>Chatbot WhatsApp</h3>
+          <p>Il répond aux questions sur vos prix, vos horaires et la livraison, et prend les commandes à toute heure.</p>
+          <div class="price"><small>à partir de</small><strong>75 000 FCFA</strong></div>
+        </li>
+        <li>
+          <h3>Automatisation</h3>
+          <p>Relances clients, suivi des commandes, rappels de paiement : on supprime les tâches que vous refaites chaque jour.</p>
+          <div class="price"><small>à partir de</small><strong>50 000 FCFA</strong></div>
+        </li>
+      </ul>
+      <p class="note">Paiement par Wave, Orange Money ou espèces. Acompte de 50 % au démarrage, le reste à la livraison.</p>
+    </div>
+  </section>
+
+  <section class="wrap steps-sec" aria-labelledby="steps-title">
+    <h2 class="section-title" id="steps-title" style="color:var(--indigo)">Comment ça se passe</h2>
+    <p class="section-intro">Pas de rendez-vous compliqué. Tout peut se faire par WhatsApp.</p>
+    <ol class="steps">
+      <li><h3>Vous nous écrivez</h3><p>Dites-nous ce que vous vendez et ce dont vous avez besoin. Un message vocal suffit.</p></li>
+      <li><h3>On vous propose</h3><p>Vous recevez un devis et une première maquette, en général sous 48 heures.</p></li>
+      <li><h3>On livre et on vous forme</h3><p>Vous recevez vos fichiers ou votre outil, et on vous montre comment l'utiliser.</p></li>
+    </ol>
+  </section>
+
+  <section class="wrap who">
+    <div>
+      <h2 class="section-title" style="color:var(--indigo)">Pour qui</h2>
+      <ul>
+        <li><b>Boutiques et commerçants</b> qui vendent déjà sur WhatsApp</li>
+        <li><b>Restaurants et fast-foods</b> qui prennent des commandes</li>
+        <li><b>Pharmacies et cliniques</b> qui veulent informer leurs patients</li>
+        <li><b>Prestataires de services</b> : événementiel, transport, beauté, BTP</li>
+      </ul>
+    </div>
+    <div class="about">
+      <h2 class="section-title" style="color:var(--indigo)">Qui sommes-nous</h2>
+      <p>Mineka Digital IA est née à Kaolack. Derrière, il y a des entrepreneurs qui font tourner leurs propres affaires depuis 2018, dont Mineka Baches, location pour l'événementiel.</p>
+      <p>On connaît vos journées : les clients qui écrivent tard, les commandes qui se perdent, le temps qui manque. On utilise l'intelligence artificielle pour vous faire gagner ce temps, pas pour vous compliquer la vie.</p>
+      <p class="sign">Dr Moustapha Niang, fondateur</p>
+    </div>
+  </section>
+
+  <section class="wrap faq" aria-labelledby="faq-title">
+    <h2 class="section-title" id="faq-title" style="color:var(--indigo)">Questions fréquentes</h2>
+    <details>
+      <summary>Je ne suis pas à Kaolack, vous pouvez travailler avec moi ?</summary>
+      <p>Oui. Tout se fait par WhatsApp : échanges, maquettes, validation et livraison des fichiers. On travaille avec tout le Sénégal.</p>
+    </details>
+    <details>
+      <summary>Combien de temps faut-il ?</summary>
+      <p>Une affiche est prête en 24 à 48 heures, un logo en 3 à 5 jours, un site ou un chatbot en 1 à 3 semaines selon le projet.</p>
+    </details>
+    <details>
+      <summary>Le chatbot peut-il répondre en wolof ?</summary>
+      <p>Il répond en français et peut comprendre les messages simples en wolof. On le règle avec vous à partir des vraies questions de vos clients.</p>
+    </details>
+    <details>
+      <summary>Je ne m'y connais pas en informatique.</summary>
+      <p>Ce n'est pas un problème. On installe tout, on vous explique avec des mots simples et on reste joignables après la livraison.</p>
+    </details>
+  </section>
+
+  <section class="final">
+    <div class="wrap">
+      <h2 class="section-title">Parlez-nous de votre activité</h2>
+      <p>Envoyez un message avec ce que vous vendez et ce que vous voulez améliorer. On vous répond dans la journée.</p>
+      <a class="btn-wa" data-wa href="#"><svg aria-hidden="true"><use href="#wa"/></svg>Écrire sur WhatsApp</a>
+    </div>
+  </section>
+</main>
+
+<footer>
+  <div class="wrap">
+    <span>Mineka Digital IA, Kaolack, Sénégal</span>
+    <span>Une entreprise du groupe Mineka</span>
+  </div>
+</footer>
+
+<a class="wa-float" data-wa href="#" aria-label="Écrire sur WhatsApp"><svg aria-hidden="true"><use href="#wa"/></svg></a>
+
+<script>
+  // Numéro WhatsApp au format international, sans + ni espaces
+  const WHATSAPP = "221771267272";
+  const MESSAGE = "Bonjour Mineka Digital IA, je voudrais discuter d'un projet pour mon entreprise.";
+  const url = "https://wa.me/" + WHATSAPP + "?text=" + encodeURIComponent(MESSAGE);
+  document.querySelectorAll("[data-wa]").forEach(a => {
+    a.href = url; a.target = "_blank"; a.rel = "noopener";
+  });
+</script>
+</body>
+</html>
