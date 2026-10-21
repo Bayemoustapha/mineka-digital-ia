@@ -8,7 +8,7 @@
 <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns=%27http://www.w3.org/2000/svg%27 viewBox=%270 0 100 115%27%3E%3Cpath d=%27M50 0V115L0 86.25V28.75Z%27 fill=%27%231F4F7E%27/%3E%3Cpath d=%27M50 0L100 28.75V86.25L50 115Z%27 fill=%27%236DBE45%27/%3E%3C/svg%3E">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@62..125,400..900&family=Ubuntu:wght@700&family=Atkinson+Hyperlegible:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@62..125,400..900&family=Atkinson+Hyperlegible:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
 <style>
   :root {
     --indigo: #17365C;
@@ -61,14 +61,10 @@
     display: flex; justify-content: space-between; align-items: center;
     padding-block: 22px;
   }
-  .logo {
-    display: inline-flex; align-items: center; gap: 10px;
-    text-decoration: none; font-family: "Ubuntu", var(--display); font-weight: 700;
-  }
-  .logo svg { width: 50px; height: 58px; flex: none; }
-  .logo span { display: flex; flex-direction: column; line-height: 1; }
-  .logo b { font-size: 1.7rem; color: var(--indigo); letter-spacing: -.01em; }
-  .logo small { font-size: 1.12rem; color: var(--vert-fonce); letter-spacing: .01em; margin-top: 2px; }
+  .logo { display: inline-block; line-height: 0; }
+  .logo img { height: 64px; width: auto; }
+  .masthead { background: var(--indigo-deep); color: #fff; }
+  .masthead .top { padding-block: 14px; }
   .top .link-quiet { font-size: .98rem; }
 
   /* Hero */
@@ -228,23 +224,13 @@
 <body>
 
 <svg width="0" height="0" style="position:absolute" aria-hidden="true">
-  <symbol id="hex" viewBox="0 0 100 115">
-    <path d="M50 0V115L0 86.25V28.75Z" fill="#1F4F7E"/>
-    <path d="M50 0L100 28.75V86.25L50 115Z" fill="#6DBE45"/>
-    <path d="M24 16L66 20L84 38V80L62 99L26 98L11 78L10 38Z" fill="#0E2233"/>
-    <path d="M11 44L29 54L27 82L15 92M29 54L41 27" stroke="#1F4F7E" stroke-width="6" fill="none" stroke-linejoin="round" stroke-linecap="round"/>
-    <g stroke="#B9E59A" stroke-width="4" fill="#0E2233" stroke-linecap="round" stroke-linejoin="round">
-      <path d="M42 72L56 50H66M50 66H70M48 76L56 84H66" fill="none"/>
-      <circle cx="71" cy="50" r="5"/><circle cx="75" cy="66" r="5"/><circle cx="71" cy="84" r="5"/><circle cx="52" cy="50" r="4"/>
-    </g>
-  </symbol>
   <symbol id="wa" viewBox="0 0 24 24"><path fill="currentColor" d="M12.04 2C6.58 2 2.13 6.45 2.13 11.91c0 1.75.46 3.45 1.32 4.95L2.05 22l5.25-1.38a9.9 9.9 0 0 0 4.74 1.21h.01c5.46 0 9.91-4.45 9.91-9.91C21.96 6.45 17.5 2 12.04 2Zm5.8 14.03c-.25.69-1.44 1.32-1.98 1.37-.51.05-.99.24-3.33-.69-2.81-1.11-4.6-3.98-4.74-4.17-.14-.18-1.12-1.49-1.12-2.85 0-1.35.71-2.02.96-2.29.25-.28.55-.35.73-.35l.53.01c.17 0 .4-.06.62.48.23.55.78 1.9.85 2.04.07.14.11.3.02.48-.09.18-.14.3-.28.46-.14.16-.29.36-.41.48-.14.14-.28.29-.12.57.16.28.71 1.17 1.53 1.9 1.05.94 1.94 1.23 2.21 1.37.28.14.44.12.6-.07.16-.18.69-.8.88-1.08.18-.28.37-.23.62-.14.25.09 1.6.76 1.87.9.28.14.46.21.53.32.07.12.07.67-.18 1.36Z"/></symbol>
 </svg>
 
-<header class="wrap top">
-  <a class="logo" href="#" aria-label="Mineka Digital IA, accueil"><svg aria-hidden="true"><use href="#hex"/></svg><span><b>Mineka</b><small>DIGITAL IA</small></span></a>
+<header class="masthead"><div class="wrap top">
+  <a class="logo" href="#"><img src="assets/logo.png" alt="Mineka Digital IA" width="152" height="64"></a>
   <a class="link-quiet" data-wa href="#">Écrire sur WhatsApp</a>
-</header>
+</div></header>
 
 <main>
   <section class="wrap hero">
