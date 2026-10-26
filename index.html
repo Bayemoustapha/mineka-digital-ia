@@ -34,24 +34,36 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@62..125,400..900&family=Atkinson+Hyperlegible:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
+<script>document.documentElement.classList.add("js")</script>
 <style>
   :root {
     --indigo: #17365C;
+    --indigo-row: #1C3F6A;
     --indigo-deep: #0E2340;
     --ink: #14182E;
     --sel: #F2F3F8;
+    --sel-step: #E6E9F2;
     --vert: #6DBE45;
     --vert-pale: #E2F2D8;
-    --vert-clair: #8FD16A;
-    --vert-fonce: #3F8F26;
-    --wa: #1A9E50;
-    --muted: #5A6080;
+    --vert-fonce: #2F7A1C;
+    --wa: #12803F;
+    --wa-hover: #0E6B34;
+    --muted: #4A5070;
+    --on-navy: #D5D9EA;
 
     --display: "Archivo", system-ui, sans-serif;
     --body: "Atkinson Hyperlegible", system-ui, sans-serif;
 
+    /* Échelle typographique : 5 tailles */
+    --t-hero: clamp(2.15rem, 5.8vw, 5.25rem);
+    --t-h2: clamp(2rem, 4.2vw, 3.4rem);
+    --t-h3: clamp(1.375rem, 2vw, 1.75rem);
+    --t-body: 1.125rem;
+    --t-small: .9375rem;
+
     --gutter: clamp(16px, 5vw, 64px);
-    --max: 1160px;
+    --max: 1200px;
+    --gap-section: clamp(88px, 12vw, 176px);
   }
 
   * { box-sizing: border-box; }
@@ -60,189 +72,199 @@
     margin: 0;
     background: var(--sel);
     color: var(--ink);
-    font: 400 1.0625rem/1.6 var(--body);
+    font: 400 var(--t-body)/1.55 var(--body);
     -webkit-font-smoothing: antialiased;
   }
   img { max-width: 100%; display: block; }
   a { color: inherit; }
-  :focus-visible { outline: 3px solid var(--vert); outline-offset: 3px; border-radius: 4px; }
+  :focus-visible { outline: 3px solid var(--vert); outline-offset: 3px; }
+  h1, h2, h3 { hyphens: none; text-wrap: balance; }
 
   .wrap { max-width: var(--max); margin: 0 auto; padding: 0 var(--gutter); }
 
-  /* Boutons */
-  .btn-wa {
-    display: inline-flex; align-items: center; gap: .6em;
-    background: var(--wa); color: #fff; text-decoration: none;
-    font: 700 1.05rem/1 var(--body);
-    padding: 1em 1.4em; border-radius: 999px;
-    transition: transform .15s ease, background .15s ease;
+  .h2 {
+    font: 800 var(--t-h2)/1.02 var(--display);
+    font-stretch: 110%; letter-spacing: -.025em; margin: 0 0 .4em; color: var(--indigo);
   }
-  .btn-wa:hover { background: #158643; transform: translateY(-1px); }
+  .intro { max-width: 46ch; margin: 0 0 2.5rem; }
+
+  /* Boutons */
+  .btn-wa, .btn-cmd {
+    display: inline-flex; align-items: center; justify-content: center; gap: .6em;
+    text-decoration: none; font: 700 var(--t-body)/1 var(--body);
+    padding: 1em 1.5em; border-radius: 999px; white-space: nowrap;
+    transition: transform .15s ease, background-color .15s ease;
+  }
+  .btn-wa { background: var(--wa); color: #fff; }
+  .btn-wa:hover { background: var(--wa-hover); transform: translateY(-2px); }
   .btn-wa svg { width: 1.3em; height: 1.3em; flex: none; }
-  .link-quiet { font-weight: 700; text-underline-offset: 4px; }
+  .btn-cmd { background: var(--vert); color: var(--indigo-deep); padding: .8em 1.3em; }
+  .btn-cmd:hover { background: #82CC5E; transform: translateY(-2px); }
+  .btn-wa:active, .btn-cmd:active, .switch button:active { transform: scale(.97); }
+  .link-quiet { font-weight: 700; text-underline-offset: 5px; text-decoration-thickness: 2px; transition: color .15s ease; }
+  .link-quiet:hover { color: var(--vert-fonce); }
 
   /* En-tête */
-  .top {
-    display: flex; justify-content: space-between; align-items: center;
-    padding-block: 22px;
-  }
+  .masthead { background: var(--indigo-deep); color: #fff; }
+  .top { display: flex; justify-content: space-between; align-items: center; padding-block: 14px; gap: 24px; }
   .logo { display: inline-block; line-height: 0; }
   .logo img { height: 64px; width: auto; }
-  .masthead { background: var(--indigo-deep); color: #fff; }
-  .masthead .top { padding-block: 14px; }
-  .top .link-quiet { font-size: .98rem; }
+  .nav { display: flex; align-items: center; gap: 28px; }
+  .nav a { font-size: var(--t-small); }
+  .nav a:not(.btn-wa) { color: #fff; text-decoration: none; font-weight: 700; }
+  .nav a:not(.btn-wa):hover { color: var(--vert); }
+  .nav .btn-wa { font-size: var(--t-small); padding: .8em 1.2em; }
 
   /* Hero */
-  .hero {
-    display: grid; grid-template-columns: 1.15fr .85fr;
-    gap: clamp(32px, 6vw, 88px); align-items: center;
-    padding-block: clamp(32px, 7vw, 96px) clamp(56px, 9vw, 120px);
-  }
+  .hero { padding-block: clamp(40px, 6vw, 88px) 0; }
   .hero h1 {
-    font: 850 clamp(2.2rem, 4.4vw, 3.9rem)/1 var(--display);
-    font-stretch: 112%;
-    hyphens: none;
-    letter-spacing: -.025em;
-    margin: 0 0 .45em;
-    color: var(--indigo);
-    text-wrap: balance;
+    font: 850 var(--t-hero)/.98 var(--display);
+    font-stretch: 112%; letter-spacing: -.035em;
+    margin: 0 0 clamp(32px, 4vw, 48px); color: var(--indigo);
   }
-  .hero p.lead {
-    font-size: clamp(1.1rem, 1.6vw, 1.3rem);
-    max-width: 34ch; margin: 0 0 2rem; color: var(--ink);
-  }
-  .hero .actions { display: flex; flex-wrap: wrap; gap: 14px 24px; align-items: center; }
-  .hero .where { margin-top: 2.2rem; color: var(--muted); font-size: .95rem; max-width: 40ch; }
+  .hero-grid { display: grid; grid-template-columns: 1fr 1fr; gap: clamp(32px, 6vw, 96px); align-items: start; }
+  .hero .lead { font-size: var(--t-h3); line-height: 1.35; max-width: 34ch; margin: 0 0 2rem; }
+  .hero .actions { display: flex; flex-wrap: wrap; gap: 16px 28px; align-items: center; }
+  .hero .where { margin: 2.5rem 0 0; color: var(--muted); font-size: var(--t-small); max-width: 42ch; }
 
-  /* Téléphone et conversation */
-  .phone {
-    background: var(--indigo); border-radius: 34px; padding: 12px;
-    box-shadow: 18px 22px 0 var(--vert);
-    max-width: 360px; justify-self: center; width: 100%;
-    transform: rotate(1.5deg);
+  /* Démo de conversation (fragment d'interface) */
+  .demo { margin: 0; background: var(--vert); padding: clamp(24px, 4vw, 48px) clamp(20px, 4vw, 48px) clamp(20px, 3vw, 32px); }
+  .switch { display: flex; flex-wrap: wrap; gap: 8px; margin: 0 0 20px; }
+  .switch button {
+    font: 700 var(--t-small)/1 var(--body); color: var(--indigo-deep); cursor: pointer;
+    background: var(--vert-pale); border: 0; border-radius: 999px; padding: .75em 1.1em;
+    transition: background-color .15s ease, color .15s ease, transform .15s ease;
   }
-  .screen { background: #E9E4DC; border-radius: 24px; overflow: hidden; }
-  .chat-head {
-    background: #0F5E45; color: #fff; display: flex; align-items: center; gap: 10px;
-    padding: 12px 14px;
-  }
+  .switch button:hover { background: #fff; }
+  .switch button[aria-pressed="true"] { background: var(--indigo-deep); color: #fff; }
+  .phone { background: var(--indigo-deep); border-radius: 32px; padding: 10px; max-width: 380px; margin: 0 auto; }
+  .screen { background: #E3EAE2; border-radius: 23px; overflow: hidden; }
+  .chat-head { background: #0F5E45; color: #fff; display: flex; align-items: center; gap: 10px; padding: 12px 14px; }
   .avatar {
-    width: 36px; height: 36px; border-radius: 50%; background: var(--vert-clair);
-    display: grid; place-items: center; font: 800 .95rem/1 var(--display); color: var(--ink);
+    width: 38px; height: 38px; border-radius: 50%; background: var(--vert);
+    display: grid; place-items: center; font: 800 1rem/1 var(--display); color: var(--indigo-deep);
   }
-  .chat-head b { display: block; font-size: .95rem; }
-  .chat-head small { opacity: .8; font-size: .78rem; }
-  .chat { padding: 16px 12px 20px; display: flex; flex-direction: column; gap: 8px; min-height: 380px; }
-  .msg {
-    max-width: 82%; padding: 8px 10px 6px; border-radius: 10px;
-    font-size: .92rem; line-height: 1.4; position: relative;
-    box-shadow: 0 1px 0 rgba(20,24,46,.12);
-  }
-  .msg time { display: block; text-align: right; font-size: .68rem; color: #6b6f80; margin-top: 2px; }
+  .chat-head b { display: block; font-size: 1rem; }
+  .chat-head small { font-size: .875rem; color: #CFE6DA; }
+  .chat { padding: 16px 12px 18px; display: flex; flex-direction: column; gap: 8px; min-height: 360px; }
+  .msg { max-width: 84%; padding: 8px 11px 6px; border-radius: 10px; font-size: .9375rem; line-height: 1.4; }
+  .msg time { display: block; text-align: right; font-size: .8125rem; color: #4E5468; margin-top: 2px; }
   .in { background: #fff; align-self: flex-start; border-top-left-radius: 2px; }
-  .out { background: #D7F5C6; align-self: flex-end; border-top-right-radius: 2px; }
-  .bot-tag { display: block; font-size: .7rem; font-weight: 700; color: #0F5E45; margin-bottom: 2px; }
-  .phone-caption { text-align: center; margin: 26px auto 0; font-size: .95rem; color: var(--muted); max-width: 30ch; }
+  .out { background: #D2F2C0; align-self: flex-end; border-top-right-radius: 2px; }
+  .bot-tag { display: block; font-size: .8125rem; font-weight: 700; color: #0F5E45; margin-bottom: 2px; }
+  .demo figcaption { margin: 18px auto 0; text-align: center; font-size: var(--t-small); color: var(--indigo-deep); max-width: 34ch; }
 
-  @media (prefers-reduced-motion: no-preference) {
-    .chat .msg { opacity: 0; transform: translateY(8px); animation: pop .35s ease forwards; }
-    .chat .msg:nth-child(1) { animation-delay: .5s; }
-    .chat .msg:nth-child(2) { animation-delay: 1.5s; }
-    .chat .msg:nth-child(3) { animation-delay: 2.7s; }
-    .chat .msg:nth-child(4) { animation-delay: 3.7s; }
-    .chat .msg:nth-child(5) { animation-delay: 4.9s; }
-  }
-  @keyframes pop { to { opacity: 1; transform: none; } }
-
-  /* Tableau des prix */
-  .tarifs { background: var(--indigo); color: var(--sel); padding-block: clamp(64px, 9vw, 120px); }
-  .section-title {
-    font: 800 clamp(2rem, 4.4vw, 3.4rem)/1.02 var(--display);
-    font-stretch: 112%; letter-spacing: -.02em; margin: 0 0 .35em; text-wrap: balance;
-  }
-  .section-intro { max-width: 52ch; margin: 0 0 3rem; font-size: 1.1rem; }
-  .tarifs .section-intro { color: #C9CCE0; }
-  .board { list-style: none; margin: 0; padding: 0; border-top: 2px solid rgba(242,243,248,.25); }
+  /* Tarifs */
+  .tarifs { margin-top: var(--gap-section); background: var(--indigo); color: #fff; padding-block: clamp(72px, 9vw, 128px); }
+  .tarifs .h2 { color: #fff; }
+  .tarifs .intro { color: var(--on-navy); }
+  .board { list-style: none; margin: 0; padding: 0; }
   .board li {
-    display: grid; grid-template-columns: minmax(180px, 1fr) 2fr auto;
-    gap: 8px 40px; align-items: baseline;
-    padding: 26px 0; border-bottom: 2px solid rgba(242,243,248,.25);
+    display: grid; grid-template-columns: minmax(200px, 1fr) 2fr auto;
+    gap: 12px 40px; align-items: center; padding: 28px clamp(16px, 2.5vw, 32px);
   }
-  .board h3 {
-    font: 750 clamp(1.35rem, 2.4vw, 1.75rem)/1.1 var(--display);
-    font-stretch: 105%; margin: 0; color: #fff;
-  }
-  .board p { margin: 0; color: #C9CCE0; max-width: 52ch; }
+  .board li:nth-child(odd) { background: var(--indigo-row); }
+  .board h3 { font: 750 var(--t-h3)/1.1 var(--display); font-stretch: 105%; margin: 0; }
+  .board p { margin: 0; color: var(--on-navy); max-width: 50ch; }
+  .offer { display: flex; align-items: center; gap: 24px; justify-content: flex-end; }
   .price { text-align: right; white-space: nowrap; }
-  .price small { display: block; font-size: .85rem; color: #A9AECB; }
-  .price strong {
-    font: 850 clamp(1.4rem, 2.6vw, 2rem)/1 var(--display);
-    font-stretch: 95%; color: var(--vert-clair);
-  }
-  .tarifs .note { margin-top: 2rem; color: #A9AECB; font-size: .95rem; max-width: 60ch; }
+  .price small { display: block; font-size: var(--t-small); color: var(--on-navy); }
+  .price strong { font: 850 var(--t-h3)/1.1 var(--display); color: var(--vert); }
+  .tarifs .note { margin: 2.5rem 0 0; color: var(--on-navy); max-width: 60ch; }
 
   /* Étapes */
-  .steps-sec { padding-block: clamp(64px, 9vw, 120px); }
-  .steps { list-style: none; padding: 0; margin: 0; display: grid; grid-template-columns: repeat(3, 1fr); gap: 40px; counter-reset: s; }
-  .steps li { counter-increment: s; }
-  .steps li::before {
-    content: counter(s);
-    display: block; font: 900 4.5rem/1 var(--display); font-stretch: 125%;
-    color: var(--vert); margin-bottom: 14px;
-  }
-  .steps h3 { font: 750 1.35rem/1.2 var(--display); margin: 0 0 .4em; color: var(--indigo); }
-  .steps p { margin: 0; max-width: 34ch; }
+  .steps-sec { padding-block: var(--gap-section) 0; display: grid; grid-template-columns: 1.1fr 1fr; gap: clamp(32px, 6vw, 96px); align-items: center; }
+  .steps { list-style: none; padding: 0; margin: 0; display: grid; gap: 32px; }
+  .steps h3 { font: 750 var(--t-h3)/1.2 var(--display); margin: 0 0 .3em; color: var(--indigo); }
+  .steps p { margin: 0; max-width: 42ch; }
+  .shot { margin: 0; }
+  .shot img { width: 100%; height: auto; aspect-ratio: 4 / 5; object-fit: cover; }
+  .shot figcaption { margin-top: 12px; font-size: var(--t-small); color: var(--muted); }
 
   /* Pour qui */
-  .who { border-top: 2px solid #D9DBE8; padding-block: clamp(56px, 8vw, 100px); display: grid; grid-template-columns: 1fr 1fr; gap: clamp(32px, 6vw, 80px); }
-  .who .section-title { font-size: clamp(1.9rem, 3.4vw, 2.6rem); hyphens: none; }
-  .who ul { margin: 0; padding: 0; list-style: none; }
-  .who li { padding: 14px 0; border-bottom: 1px solid #D9DBE8; font-size: 1.1rem; }
-  .who li b { color: var(--indigo); }
-  .about p { max-width: 50ch; }
+  .who { padding-block: var(--gap-section) 0; display: grid; grid-template-columns: 1.2fr 1fr; gap: clamp(32px, 6vw, 96px); align-items: center; }
+  .who .shot img { aspect-ratio: 3 / 2; }
+  .who ul { margin: 0; padding: 0; list-style: none; display: grid; gap: 20px; }
+  .who li b { display: block; font: 700 var(--t-h3)/1.25 var(--body); color: var(--indigo); }
+
+  /* Qui sommes-nous */
+  .about-sec { margin-top: var(--gap-section); background: var(--sel-step); padding-block: clamp(72px, 9vw, 128px); }
+  .about { display: grid; grid-template-columns: 1fr 1fr; gap: clamp(32px, 6vw, 96px); align-items: center; }
+  .about .shot img { aspect-ratio: 3 / 2; filter: grayscale(1) contrast(1.05); }
+  .about p { max-width: 48ch; }
   .about .sign { font-weight: 700; color: var(--indigo); }
 
   /* FAQ */
-  .faq { padding-block: 0 clamp(64px, 9vw, 120px); }
-  .faq details { border-bottom: 1px solid #D9DBE8; padding: 6px 0; max-width: 760px; }
+  .faq { padding-block: var(--gap-section); display: grid; grid-template-columns: 1fr 1.6fr; gap: clamp(32px, 6vw, 96px); align-items: start; }
+  .faq-list { display: grid; gap: 10px; }
+  .faq details { background: var(--sel-step); padding: 0 24px; transition: background-color .15s ease; }
+  .faq details:hover { background: #DCE0EC; }
   .faq summary {
-    cursor: pointer; list-style: none; padding: 16px 40px 16px 0; position: relative;
-    font: 700 1.15rem/1.3 var(--body); color: var(--indigo);
+    cursor: pointer; list-style: none; padding: 20px 40px 20px 0; position: relative;
+    font-weight: 700; color: var(--indigo);
   }
   .faq summary::-webkit-details-marker { display: none; }
   .faq summary::after {
-    content: "+"; position: absolute; right: 4px; top: 10px;
-    font: 400 1.8rem/1 var(--display); color: var(--vert-fonce); transition: transform .2s ease;
+    content: "+"; position: absolute; right: 0; top: 50%; translate: 0 -50%;
+    font: 400 var(--t-h3)/1 var(--display); color: var(--vert-fonce); transition: rotate .2s ease;
   }
-  .faq details[open] summary::after { transform: rotate(45deg); }
-  .faq details p { margin: 0 0 18px; max-width: 62ch; }
+  .faq details[open] summary::after { rotate: 45deg; }
+  .faq details p { margin: 0; padding: 0 0 22px; max-width: 60ch; }
 
   /* Appel final */
-  .final { background: var(--vert-pale); padding-block: clamp(64px, 9vw, 112px); }
-  .final .section-title { color: var(--indigo); max-width: 18ch; }
-  .final p { max-width: 46ch; margin: 0 0 2rem; font-size: 1.1rem; }
+  .final { background: var(--vert-pale); padding-block: clamp(72px, 9vw, 128px); }
+  .final .wrap { display: grid; grid-template-columns: 1fr 1fr; gap: clamp(32px, 6vw, 96px); align-items: center; }
+  .final p { max-width: 42ch; margin: 0 0 2rem; }
+  .num { text-decoration: none; display: block; }
+  .num strong { display: block; font: 850 var(--t-h2)/1 var(--display); font-stretch: 105%; letter-spacing: -.02em; color: var(--indigo); white-space: nowrap; transition: color .15s ease; }
+  .num:hover strong { color: var(--vert-fonce); }
+  .num span { display: block; margin-top: 12px; color: var(--muted); }
 
-  footer { background: var(--indigo-deep); color: #A9AECB; padding-block: 32px; font-size: .92rem; }
-  footer .wrap { display: flex; flex-wrap: wrap; justify-content: space-between; gap: 12px; }
+  footer { background: var(--indigo-deep); color: var(--on-navy); padding-block: 48px 40px; font-size: var(--t-small); }
+  footer .wrap { display: grid; gap: 24px; }
+  .foot-top { display: flex; flex-wrap: wrap; justify-content: space-between; align-items: center; gap: 16px; }
+  .foot-top img { height: 56px; width: auto; }
+  .credits { margin: 0; max-width: 90ch; color: #AEB4CF; }
+  .credits a { color: inherit; }
 
   /* Bouton flottant mobile */
   .wa-float {
     position: fixed; right: 16px; bottom: 16px; z-index: 10;
-    width: 58px; height: 58px; border-radius: 50%; background: var(--wa);
+    width: 60px; height: 60px; border-radius: 50%; background: var(--wa);
     display: none; place-items: center; color: #fff;
-    box-shadow: 0 6px 18px rgba(20,24,46,.25);
+    box-shadow: 0 6px 18px rgba(20,24,46,.25); /* taste-skill-ignore : bouton flottant fixe */
+    transition: transform .15s ease;
   }
-  .wa-float svg { width: 30px; height: 30px; }
+  .wa-float:active { transform: scale(.94); }
+  .wa-float svg { width: 32px; height: 32px; }
 
-  @media (max-width: 860px) {
-    .hero { grid-template-columns: 1fr; }
-    .phone { transform: none; box-shadow: 10px 12px 0 var(--vert); max-width: 330px; }
-    .board li { grid-template-columns: 1fr auto; }
-    .board li p { grid-column: 1 / -1; grid-row: 2; }
-    .steps { grid-template-columns: 1fr; gap: 28px; }
-    .who { grid-template-columns: 1fr; }
+  /* Apparitions au défilement (le contenu reste visible sans script) */
+  @media (prefers-reduced-motion: no-preference) {
+    .js [data-rise] { opacity: 0; transform: translateY(24px); transition: opacity .6s ease, transform .6s cubic-bezier(.2,.7,.2,1); transition-delay: calc(var(--i, 0) * 80ms); }
+    .js [data-rise].is-in { opacity: 1; transform: none; }
+    .js .shot img { transform: scale(1.06); transition: transform 1.4s cubic-bezier(.2,.7,.2,1); }
+    .js .shot.is-in img { transform: none; }
+    .chat .msg { animation: pop .4s ease both; }
+    .chat .msg:nth-child(2) { animation-delay: .9s; }
+    .chat .msg:nth-child(3) { animation-delay: 1.9s; }
+    .chat .msg:nth-child(4) { animation-delay: 2.8s; }
+    .chat .msg:nth-child(5) { animation-delay: 3.8s; }
+  }
+  @keyframes pop { from { opacity: 0; transform: translateY(10px); } }
+
+  @media (max-width: 900px) {
+    .hero-grid, .steps-sec, .who, .about, .faq, .final .wrap { grid-template-columns: 1fr; }
+    .board li { grid-template-columns: 1fr; gap: 10px; }
+    .offer { justify-content: space-between; margin-top: 8px; }
+    .price { text-align: left; }
+    .who .shot { order: 2; }
+    .nav a:not(.btn-wa) { display: none; }
+    .nav .btn-wa { display: none; }
     .wa-float { display: grid; }
-    .top .link-quiet { display: none; }
+  }
+  @media (max-width: 520px) {
+    .hero h1 { font-stretch: 78%; letter-spacing: -.03em; }
+    .logo img { height: 52px; }
   }
 </style>
 </head>
@@ -254,137 +276,195 @@
 
 <header class="masthead"><div class="wrap top">
   <a class="logo" href="#"><img src="assets/logo.png" alt="Mineka Digital IA" width="152" height="64"></a>
-  <a class="link-quiet" data-wa data-goatcounter-click="whatsapp-entete" href="#">Écrire sur WhatsApp</a>
+  <nav class="nav" aria-label="Navigation principale">
+    <a href="#tarifs">Tarifs</a>
+    <a href="#questions">Questions</a>
+    <a class="btn-wa" data-wa data-goatcounter-click="whatsapp-entete" href="#"><svg aria-hidden="true"><use href="#wa"/></svg>Écrire sur WhatsApp</a>
+  </nav>
 </div></header>
 
 <main>
-  <section class="wrap hero">
-    <div>
-      <h1>Vos clients écrivent sur WhatsApp. Répondez-leur, même la nuit.</h1>
-      <p class="lead">Logo, affiches, site web et chatbot WhatsApp pour les commerçants et les PME du Sénégal. Vous nous écrivez, on s'occupe du reste.</p>
-      <div class="actions">
-        <a class="btn-wa" data-wa data-goatcounter-click="whatsapp-haut" href="#"><svg aria-hidden="true"><use href="#wa"/></svg>Discuter de mon projet</a>
-        <a class="link-quiet" href="#tarifs">Voir les tarifs</a>
-      </div>
-      <p class="where">Basés à Kaolack. On travaille avec toute la région du Saloum et, à distance, avec tout le Sénégal.</p>
-    </div>
-
-    <figure style="margin:0">
-      <div class="phone" role="img" aria-label="Exemple de conversation WhatsApp entre une cliente et le chatbot de la boutique Awa Wax à 23 h 14">
-        <div class="screen">
-          <div class="chat-head">
-            <span class="avatar" aria-hidden="true">A</span>
-            <span><b>Awa Wax, Kaolack</b><small>Répond en quelques secondes</small></span>
+  <section class="hero">
+    <div class="wrap">
+      <h1 data-rise>Vendez sur WhatsApp, même la nuit.</h1>
+      <div class="hero-grid">
+        <div>
+          <p class="lead" data-rise style="--i:1">Logo, affiches, site web et chatbot WhatsApp pour les commerçants et PME du Sénégal.</p>
+          <div class="actions" data-rise style="--i:2">
+            <a class="btn-wa" data-wa data-goatcounter-click="whatsapp-haut" href="#"><svg aria-hidden="true"><use href="#wa"/></svg>Discuter de mon projet</a>
+            <a class="link-quiet" href="#tarifs">Voir les tarifs</a>
           </div>
-          <div class="chat" aria-hidden="true">
-            <div class="msg in">Bonsoir, vous avez encore le wax bleu de la photo ?<time>23:14</time></div>
-            <div class="msg out"><span class="bot-tag">Assistant Awa Wax</span>Bonsoir ! Oui, il en reste 4 pièces de 6 yards à 12 000 FCFA. Je vous envoie les autres motifs ?<time>23:14</time></div>
-            <div class="msg in">Oui. Vous livrez à Médina Baye ?<time>23:15</time></div>
-            <div class="msg out"><span class="bot-tag">Assistant Awa Wax</span>Oui, livraison demain matin, 1 000 FCFA. Je réserve une pièce à votre nom ?<time>23:15</time></div>
-            <div class="msg in">Oui merci 🙏<time>23:16</time></div>
-          </div>
+          <p class="where" data-rise style="--i:3">Basés à Kaolack. On travaille avec toute la région du Saloum et, à distance, avec tout le Sénégal.</p>
         </div>
+
+        <figure class="demo" data-rise style="--i:2">
+          <div class="switch" role="group" aria-label="Choisir un exemple de commerce">
+            <button type="button" data-demo="wax" aria-pressed="true">Boutique</button>
+            <button type="button" data-demo="resto" aria-pressed="false">Restaurant</button>
+            <button type="button" data-demo="pharma" aria-pressed="false">Pharmacie</button>
+          </div>
+          <div class="phone" data-ui role="img" aria-label="Exemple de conversation WhatsApp entre un client et un chatbot, tard le soir">
+            <div class="screen">
+              <div class="chat-head">
+                <span class="avatar" aria-hidden="true" data-avatar>A</span>
+                <span><b data-shop>Awa Wax, Kaolack</b><small>Répond en quelques secondes</small></span>
+              </div>
+              <div class="chat" aria-hidden="true" data-chat>
+                <div class="msg in">Bonsoir, vous avez encore le wax bleu de la photo ?<time>23:14</time></div>
+                <div class="msg out"><span class="bot-tag">Assistant automatique</span>Bonsoir ! Oui, il en reste 4 pièces de 6 yards à 12 000 FCFA. Je vous envoie les autres motifs ?<time>23:14</time></div>
+                <div class="msg in">Oui. Vous livrez à Médina Baye ?<time>23:15</time></div>
+                <div class="msg out"><span class="bot-tag">Assistant automatique</span>Oui, livraison demain matin, 1 000 FCFA. Je réserve une pièce à votre nom ?<time>23:15</time></div>
+                <div class="msg in">Oui, merci beaucoup.<time>23:16</time></div>
+              </div>
+            </div>
+          </div>
+          <figcaption>Exemples de chatbot : la vente est faite, la boutique est fermée.</figcaption>
+        </figure>
       </div>
-      <figcaption class="phone-caption">Exemple de chatbot : la vente est faite à 23 h, la boutique est fermée.</figcaption>
-    </figure>
+    </div>
   </section>
 
-  <section class="tarifs" id="tarifs">
+  <section class="tarifs" id="tarifs" aria-labelledby="tarifs-title">
     <div class="wrap">
-      <h2 class="section-title">Ce qu'on fait pour vous</h2>
-      <p class="section-intro">Des prix clairs pour démarrer. Le devis final dépend de votre projet, et on vous le donne avant de commencer.</p>
+      <h2 class="h2" id="tarifs-title" data-rise>Ce qu'on fait pour vous</h2>
+      <p class="intro" data-rise style="--i:1">Des prix clairs pour démarrer. Le devis final dépend de votre projet, et on vous le donne avant de commencer.</p>
       <ul class="board">
-        <li>
+        <li data-rise>
           <h3>Logo</h3>
           <p>Trois propositions, deux séries de retouches, fichiers prêts pour l'enseigne, les sacs et les réseaux sociaux.</p>
-          <div class="price"><small>à partir de</small><strong>10 000 FCFA</strong></div>
+          <div class="offer">
+            <div class="price"><small>à partir de</small><strong>10 000 FCFA</strong></div>
+            <a class="btn-cmd" data-wa data-wa-msg="Bonjour Mineka Digital IA, je voudrais un logo pour mon entreprise. Mon activité : " data-goatcounter-click="commander-logo" href="#">Commander</a>
+          </div>
         </li>
-        <li>
+        <li data-rise>
           <h3>Affiches et visuels</h3>
           <p>Promotions, ouvertures, événements : affiches pour l'impression et visuels pour WhatsApp, Facebook et Instagram.</p>
-          <div class="price"><small>à partir de</small><strong>5 000 FCFA</strong></div>
+          <div class="offer">
+            <div class="price"><small>à partir de</small><strong>5 000 FCFA</strong></div>
+            <a class="btn-cmd" data-wa data-wa-msg="Bonjour Mineka Digital IA, je voudrais une affiche ou des visuels. C'est pour : " data-goatcounter-click="commander-affiche" href="#">Commander</a>
+          </div>
         </li>
-        <li>
+        <li data-rise>
           <h3>Site web</h3>
           <p>Un site simple qui présente votre activité, vos produits et vos contacts, lisible sur tous les téléphones.</p>
-          <div class="price"><small>à partir de</small><strong>125 000 FCFA</strong></div>
+          <div class="offer">
+            <div class="price"><small>à partir de</small><strong>125 000 FCFA</strong></div>
+            <a class="btn-cmd" data-wa data-wa-msg="Bonjour Mineka Digital IA, je voudrais un site web pour mon entreprise. Mon activité : " data-goatcounter-click="commander-site" href="#">Commander</a>
+          </div>
         </li>
-        <li>
+        <li data-rise>
           <h3>Chatbot WhatsApp</h3>
           <p>Il répond aux questions sur vos prix, vos horaires et la livraison, et prend les commandes à toute heure.</p>
-          <div class="price"><small>à partir de</small><strong>75 000 FCFA</strong></div>
+          <div class="offer">
+            <div class="price"><small>à partir de</small><strong>75 000 FCFA</strong></div>
+            <a class="btn-cmd" data-wa data-wa-msg="Bonjour Mineka Digital IA, je voudrais un chatbot WhatsApp pour mon commerce. Je vends : " data-goatcounter-click="commander-chatbot" href="#">Commander</a>
+          </div>
         </li>
-        <li>
+        <li data-rise>
           <h3>Automatisation</h3>
           <p>Relances clients, suivi des commandes, rappels de paiement : on supprime les tâches que vous refaites chaque jour.</p>
-          <div class="price"><small>à partir de</small><strong>50 000 FCFA</strong></div>
+          <div class="offer">
+            <div class="price"><small>à partir de</small><strong>50 000 FCFA</strong></div>
+            <a class="btn-cmd" data-wa data-wa-msg="Bonjour Mineka Digital IA, je voudrais automatiser une tâche dans mon entreprise. La tâche : " data-goatcounter-click="commander-automatisation" href="#">Commander</a>
+          </div>
         </li>
       </ul>
-      <p class="note">Paiement par Wave, Orange Money ou espèces. Acompte de 50 % au démarrage, le reste à la livraison.</p>
+      <p class="note" data-rise>Paiement par Wave, Orange Money ou espèces. Acompte de 50 % au démarrage, le reste à la livraison.</p>
     </div>
   </section>
 
   <section class="wrap steps-sec" aria-labelledby="steps-title">
-    <h2 class="section-title" id="steps-title" style="color:var(--indigo)">Comment ça se passe</h2>
-    <p class="section-intro">Pas de rendez-vous compliqué. Tout peut se faire par WhatsApp.</p>
-    <ol class="steps">
-      <li><h3>Vous nous écrivez</h3><p>Dites-nous ce que vous vendez et ce dont vous avez besoin. Un message vocal suffit.</p></li>
-      <li><h3>On vous propose</h3><p>Vous recevez un devis et une première maquette, en général sous 48 heures.</p></li>
-      <li><h3>On livre et on vous forme</h3><p>Vous recevez vos fichiers ou votre outil, et on vous montre comment l'utiliser.</p></li>
-    </ol>
+    <div>
+      <h2 class="h2" id="steps-title" data-rise>Comment ça se passe</h2>
+      <p class="intro" data-rise style="--i:1">Pas de rendez-vous compliqué. Tout peut se faire par WhatsApp.</p>
+      <ol class="steps">
+        <li data-rise><h3>Vous nous écrivez</h3><p>Dites-nous ce que vous vendez et ce dont vous avez besoin. Un message vocal suffit.</p></li>
+        <li data-rise style="--i:1"><h3>On vous propose</h3><p>Vous recevez un devis et une première maquette, en général sous 48 heures.</p></li>
+        <li data-rise style="--i:2"><h3>On livre et on vous forme</h3><p>Vous recevez vos fichiers ou votre outil, et on vous montre comment l'utiliser. Vos affiches partent chez l'imprimeur avec des fichiers prêts.</p></li>
+      </ol>
+    </div>
+    <figure class="shot" data-rise style="--i:1">
+      <img src="assets/dakar-une-imprimerie-2.jpg" width="1200" height="900" alt="Façade d'une imprimerie à l'angle d'une rue de Dakar" loading="lazy" decoding="async">
+      <figcaption>Une imprimerie à Dakar.</figcaption>
+    </figure>
   </section>
 
-  <section class="wrap who">
+  <section class="wrap who" aria-labelledby="who-title">
+    <figure class="shot" data-rise>
+      <img src="assets/main-street-in-kaolack-senegal.jpg" width="1400" height="931" alt="Rue commerçante de Kaolack avec des étals, des passants et des taxis" loading="lazy" decoding="async">
+      <figcaption>La rue principale de Kaolack.</figcaption>
+    </figure>
     <div>
-      <h2 class="section-title" style="color:var(--indigo)">Pour qui</h2>
+      <h2 class="h2" id="who-title" data-rise>Pour qui</h2>
       <ul>
-        <li><b>Boutiques et commerçants</b> qui vendent déjà sur WhatsApp</li>
-        <li><b>Restaurants et fast-foods</b> qui prennent des commandes</li>
-        <li><b>Pharmacies et cliniques</b> qui veulent informer leurs patients</li>
-        <li><b>Prestataires de services</b> : événementiel, transport, beauté, BTP</li>
+        <li data-rise><b>Boutiques et commerçants</b>qui vendent déjà sur WhatsApp</li>
+        <li data-rise style="--i:1"><b>Restaurants et fast-foods</b>qui prennent des commandes</li>
+        <li data-rise style="--i:2"><b>Pharmacies et cliniques</b>qui veulent informer leurs patients</li>
+        <li data-rise style="--i:3"><b>Prestataires de services</b>événementiel, transport, beauté, BTP</li>
       </ul>
     </div>
-    <div class="about">
-      <h2 class="section-title" style="color:var(--indigo)">Qui sommes-nous</h2>
-      <p>Mineka Digital IA est née à Kaolack. Derrière, il y a des entrepreneurs qui font tourner leurs propres affaires depuis 2018, dont Mineka Baches, location pour l'événementiel.</p>
-      <p>On connaît vos journées : les clients qui écrivent tard, les commandes qui se perdent, le temps qui manque. On utilise l'intelligence artificielle pour vous faire gagner ce temps, pas pour vous compliquer la vie.</p>
-      <p class="sign">Dr Moustapha Niang, fondateur</p>
+  </section>
+
+  <section class="about-sec" aria-labelledby="about-title">
+    <div class="wrap about">
+      <div>
+        <h2 class="h2" id="about-title" data-rise>Qui sommes-nous</h2>
+        <p data-rise style="--i:1">Mineka Digital IA est née à Kaolack. Derrière, il y a des entrepreneurs qui font tourner leurs propres affaires depuis 2018, dont Mineka Baches, location pour l'événementiel.</p>
+        <p data-rise style="--i:2">On connaît vos journées : les clients qui écrivent tard, les commandes qui se perdent, le temps qui manque. On utilise l'intelligence artificielle pour vous faire gagner ce temps, pas pour vous compliquer la vie.</p>
+        <p class="sign" data-rise style="--i:3">Dr Moustapha Niang, fondateur</p>
+      </div>
+      <figure class="shot" data-rise style="--i:1">
+        <img src="assets/marche-de-kaolack-aof.jpg" width="1200" height="768" alt="Carte postale ancienne du marché de Kaolack, avec un grand arbre et la halle" loading="lazy" decoding="async">
+        <figcaption>Le marché de Kaolack vers 1900. Une ville de commerce depuis toujours.</figcaption>
+      </figure>
     </div>
   </section>
 
-  <section class="wrap faq" aria-labelledby="faq-title">
-    <h2 class="section-title" id="faq-title" style="color:var(--indigo)">Questions fréquentes</h2>
-    <details>
-      <summary>Je ne suis pas à Kaolack, vous pouvez travailler avec moi ?</summary>
-      <p>Oui. Tout se fait par WhatsApp : échanges, maquettes, validation et livraison des fichiers. On travaille avec tout le Sénégal.</p>
-    </details>
-    <details>
-      <summary>Combien de temps faut-il ?</summary>
-      <p>Une affiche est prête en 24 à 48 heures, un logo en 3 à 5 jours, un site ou un chatbot en 1 à 3 semaines selon le projet.</p>
-    </details>
-    <details>
-      <summary>Le chatbot peut-il répondre en wolof ?</summary>
-      <p>Il répond en français et peut comprendre les messages simples en wolof. On le règle avec vous à partir des vraies questions de vos clients.</p>
-    </details>
-    <details>
-      <summary>Je ne m'y connais pas en informatique.</summary>
-      <p>Ce n'est pas un problème. On installe tout, on vous explique avec des mots simples et on reste joignables après la livraison.</p>
-    </details>
+  <section class="wrap faq" id="questions" aria-labelledby="faq-title">
+    <h2 class="h2" id="faq-title" data-rise>Questions fréquentes</h2>
+    <div class="faq-list">
+      <details data-rise>
+        <summary>Je ne suis pas à Kaolack, vous pouvez travailler avec moi ?</summary>
+        <p>Oui. Tout se fait par WhatsApp : échanges, maquettes, validation et livraison des fichiers. On travaille avec tout le Sénégal.</p>
+      </details>
+      <details data-rise style="--i:1">
+        <summary>Combien de temps faut-il ?</summary>
+        <p>Une affiche est prête en 24 à 48 heures, un logo en 3 à 5 jours, un site ou un chatbot en 1 à 3 semaines selon le projet.</p>
+      </details>
+      <details data-rise style="--i:2">
+        <summary>Le chatbot peut-il répondre en wolof ?</summary>
+        <p>Il répond en français et peut comprendre les messages simples en wolof. On le règle avec vous à partir des vraies questions de vos clients.</p>
+      </details>
+      <details data-rise style="--i:3">
+        <summary>Je ne m'y connais pas en informatique.</summary>
+        <p>Ce n'est pas un problème. On installe tout, on vous explique avec des mots simples et on reste joignables après la livraison.</p>
+      </details>
+    </div>
   </section>
 
-  <section class="final">
+  <section class="final" aria-labelledby="final-title">
     <div class="wrap">
-      <h2 class="section-title">Parlez-nous de votre activité</h2>
-      <p>Envoyez un message avec ce que vous vendez et ce que vous voulez améliorer. On vous répond dans la journée.</p>
-      <a class="btn-wa" data-wa data-goatcounter-click="whatsapp-bas" href="#"><svg aria-hidden="true"><use href="#wa"/></svg>Écrire sur WhatsApp</a>
+      <div>
+        <h2 class="h2" id="final-title" data-rise>Parlez-nous de votre activité</h2>
+        <p data-rise style="--i:1">Envoyez un message avec ce que vous vendez et ce que vous voulez améliorer. On vous répond dans la journée.</p>
+        <a class="btn-wa" data-wa data-goatcounter-click="whatsapp-bas" href="#" data-rise style="--i:2"><svg aria-hidden="true"><use href="#wa"/></svg>Écrire sur WhatsApp</a>
+      </div>
+      <a class="num" href="tel:+221771267272" data-goatcounter-click="appel-numero" data-rise style="--i:1">
+        <strong>77 126 72 72</strong>
+        <span>WhatsApp et appels, depuis Kaolack</span>
+      </a>
     </div>
   </section>
 </main>
 
 <footer>
   <div class="wrap">
-    <span>Mineka Digital IA, Kaolack, Sénégal</span>
-    <span>Une entreprise du groupe Mineka</span>
+    <div class="foot-top">
+      <img src="assets/logo.png" alt="Mineka Digital IA" width="133" height="56" loading="lazy">
+      <span>Mineka Digital IA, Kaolack, Sénégal. Une entreprise du groupe Mineka.</span>
+    </div>
+    <p class="credits">Photos : « Main street in Kaolack (Senegal) » par Komalick, <a href="https://creativecommons.org/licenses/by-sa/4.0/">CC BY-SA 4.0</a> ; « Dakar, une imprimerie » par HaguardDuNord, <a href="https://creativecommons.org/licenses/by-sa/3.0/">CC BY-SA 3.0</a> ; « Marché de Kaolack » par François-Edmond Fortier, domaine public. Via Wikimedia Commons.</p>
   </div>
 </footer>
 
@@ -394,10 +474,58 @@
   // Numéro WhatsApp au format international, sans + ni espaces
   const WHATSAPP = "221771267272";
   const MESSAGE = "Bonjour Mineka Digital IA, je voudrais discuter d'un projet pour mon entreprise.";
-  const url = "https://wa.me/" + WHATSAPP + "?text=" + encodeURIComponent(MESSAGE);
   document.querySelectorAll("[data-wa]").forEach(a => {
-    a.href = url; a.target = "_blank"; a.rel = "noopener";
+    const msg = a.dataset.waMsg || MESSAGE;
+    a.href = "https://wa.me/" + WHATSAPP + "?text=" + encodeURIComponent(msg);
+    a.target = "_blank"; a.rel = "noopener";
   });
+
+  // Démo : changer d'exemple de commerce
+  const DEMOS = {
+    wax: { shop: "Awa Wax, Kaolack", avatar: "A", msgs: [
+      ["in", "Bonsoir, vous avez encore le wax bleu de la photo ?", "23:14"],
+      ["out", "Bonsoir ! Oui, il en reste 4 pièces de 6 yards à 12 000 FCFA. Je vous envoie les autres motifs ?", "23:14"],
+      ["in", "Oui. Vous livrez à Médina Baye ?", "23:15"],
+      ["out", "Oui, livraison demain matin, 1 000 FCFA. Je réserve une pièce à votre nom ?", "23:15"],
+      ["in", "Oui, merci beaucoup.", "23:16"] ] },
+    resto: { shop: "Chez Fatou, Kaolack", avatar: "F", msgs: [
+      ["in", "Salam, vous faites du thiéboudienne demain midi ?", "22:40"],
+      ["out", "Salam ! Oui, demain midi : thiéboudienne à 2 500 FCFA le plat. Combien de plats voulez-vous ?", "22:40"],
+      ["in", "3 plats, livrés au bureau vers 13 h.", "22:41"],
+      ["out", "C'est noté : 3 plats, livraison à 13 h, 500 FCFA. Quelle est l'adresse du bureau ?", "22:41"],
+      ["in", "Rue de la gare, à côté de la banque.", "22:42"] ] },
+    pharma: { shop: "Votre pharmacie", avatar: "P", msgs: [
+      ["in", "Bonsoir, vous êtes ouverts ce dimanche ?", "21:05"],
+      ["out", "Bonsoir ! Oui, la pharmacie est de garde ce dimanche, de 9 h à 21 h.", "21:05"],
+      ["in", "Vous acceptez Wave ?", "21:06"],
+      ["out", "Oui, Wave, Orange Money et espèces. Pour une question sur un traitement, le pharmacien vous répondra directement.", "21:06"],
+      ["in", "D'accord, merci.", "21:07"] ] }
+  };
+  const chat = document.querySelector("[data-chat]");
+  const shop = document.querySelector("[data-shop]");
+  const avatar = document.querySelector("[data-avatar]");
+  document.querySelectorAll("[data-demo]").forEach(btn => {
+    btn.addEventListener("click", () => {
+      const d = DEMOS[btn.dataset.demo];
+      document.querySelectorAll("[data-demo]").forEach(b => b.setAttribute("aria-pressed", b === btn));
+      shop.textContent = d.shop; avatar.textContent = d.avatar;
+      chat.innerHTML = "";
+      d.msgs.forEach(([side, text, time]) => {
+        const m = document.createElement("div");
+        m.className = "msg " + side;
+        if (side === "out") { const t = document.createElement("span"); t.className = "bot-tag"; t.textContent = "Assistant automatique"; m.append(t); }
+        m.append(text);
+        const tm = document.createElement("time"); tm.textContent = time; m.append(tm);
+        chat.append(m);
+      });
+    });
+  });
+
+  // Apparitions au défilement
+  const io = new IntersectionObserver(entries => {
+    entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add("is-in"); io.unobserve(e.target); } });
+  }, { rootMargin: "0px 0px -8% 0px" });
+  document.querySelectorAll("[data-rise]").forEach(el => io.observe(el));
 </script>
 <!-- Statistiques de visites (GoatCounter, sans cookies) -->
 <script data-goatcounter="https://minekadigitalia.goatcounter.com/count" async src="https://gc.zgo.at/count.js"></script>
