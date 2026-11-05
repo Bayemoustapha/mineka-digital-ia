@@ -27,7 +27,7 @@
   "address": { "@type": "PostalAddress", "addressLocality": "Kaolack", "addressCountry": "SN" },
   "areaServed": { "@type": "Country", "name": "Sénégal" },
   "founder": { "@type": "Person", "name": "Moustapha Niang" },
-  "priceRange": "5 000 - 125 000 FCFA",
+  "priceRange": "5 000 - 150 000 FCFA",
   "sameAs": ["https://www.facebook.com/minekadigitalia"]
 }
 </script>
@@ -228,6 +228,12 @@
   .foot-top img { height: 56px; width: auto; }
   .credits { margin: 0; max-width: 90ch; color: #AEB4CF; }
   .credits a { color: inherit; }
+  .foot-bottom { display: flex; justify-content: space-between; align-items: flex-end; gap: 24px; }
+  .socials { display: flex; gap: 12px; flex-shrink: 0; }
+  .social { display: inline-flex; border-radius: 50%; transition: transform .15s ease, opacity .15s ease; }
+  .social:hover { transform: translateY(-2px); opacity: .9; }
+  .social:focus-visible { outline: 2px solid #fff; outline-offset: 3px; }
+  @media (max-width: 640px) { .foot-bottom { flex-direction: column; align-items: flex-start; } }
 
   /* Bouton flottant mobile */
   .wa-float {
@@ -359,7 +365,7 @@
           <h3>Chatbot WhatsApp</h3>
           <p>Il répond aux questions sur vos prix, vos horaires et la livraison, et prend les commandes à toute heure.</p>
           <div class="offer">
-            <div class="price"><small>à partir de</small><strong>75 000 FCFA</strong></div>
+            <div class="price"><small>à partir de</small><strong>150 000 FCFA</strong></div>
             <a class="btn-cmd" data-wa data-wa-msg="Bonjour Mineka Digital IA, je voudrais un chatbot WhatsApp pour mon commerce. Je vends : " data-goatcounter-click="commander-chatbot" href="#">Commander</a>
           </div>
         </li>
@@ -367,7 +373,7 @@
           <h3>Automatisation</h3>
           <p>Relances clients, suivi des commandes, rappels de paiement : on supprime les tâches que vous refaites chaque jour.</p>
           <div class="offer">
-            <div class="price"><small>à partir de</small><strong>50 000 FCFA</strong></div>
+            <div class="price"><small>à partir de</small><strong>100 000 FCFA</strong></div>
             <a class="btn-cmd" data-wa data-wa-msg="Bonjour Mineka Digital IA, je voudrais automatiser une tâche dans mon entreprise. La tâche : " data-goatcounter-click="commander-automatisation" href="#">Commander</a>
           </div>
         </li>
@@ -464,9 +470,12 @@
   <div class="wrap">
     <div class="foot-top">
       <img src="assets/logo.svg" alt="Mineka Digital IA" width="189" height="52" loading="lazy">
-      <span>Mineka Digital IA est une marque de MINEKA, entreprise individuelle NIANG MOUSTAPHA. RCCM SN KLK 2019 A 176 · NINEA 007208699 · Médina Baye, Kaolack, Sénégal. <a href="mailto:contact@minekadigitalia.com">contact@minekadigitalia.com</a> · <a href="https://www.facebook.com/minekadigitalia" rel="noopener" target="_blank">Facebook</a> · <a href="confidentialite/">Confidentialité</a></span>
+      <span>Mineka Digital IA est une marque de MINEKA, entreprise individuelle NIANG MOUSTAPHA. RCCM SN KLK 2019 A 176 · NINEA 007208699 · Médina Baye, Kaolack, Sénégal. <a href="mailto:contact@minekadigitalia.com">contact@minekadigitalia.com</a> · <a href="confidentialite/">Confidentialité</a></span>
     </div>
-    <p class="credits">Photos : « Main street in Kaolack (Senegal) » par Komalick, <a href="https://creativecommons.org/licenses/by-sa/4.0/">CC BY-SA 4.0</a> ; « Dakar, une imprimerie » par HaguardDuNord, <a href="https://creativecommons.org/licenses/by-sa/3.0/">CC BY-SA 3.0</a> ; « Marché de Kaolack » par François-Edmond Fortier, domaine public. Via Wikimedia Commons.</p>
+    <div class="foot-bottom">
+      <p class="credits">Photos : « Main street in Kaolack (Senegal) » par Komalick, <a href="https://creativecommons.org/licenses/by-sa/4.0/">CC BY-SA 4.0</a> ; « Dakar, une imprimerie » par HaguardDuNord, <a href="https://creativecommons.org/licenses/by-sa/3.0/">CC BY-SA 3.0</a> ; « Marché de Kaolack » par François-Edmond Fortier, domaine public. Via Wikimedia Commons.</p>
+      <div class="socials"><a class="social" href="https://www.facebook.com/minekadigitalia" rel="noopener" target="_blank" aria-label="Page Facebook de Mineka Digital IA" title="Facebook"><svg viewBox="0 0 48 48" width="44" height="44" aria-hidden="true"><circle cx="24" cy="24" r="24" fill="#1877F2"/><path fill="#fff" transform="translate(16.5 10) scale(0.0547)" d="M279.14 288l14.22-92.66h-88.91v-60.13c0-25.35 12.42-50.06 52.24-50.06h40.42V6.26S260.43 0 225.36 0c-73.22 0-121.08 44.38-121.08 124.72v70.62H22.89V288h81.39v224h100.17V288z"/></svg></a></div>
+    </div>
   </div>
 </footer>
 
